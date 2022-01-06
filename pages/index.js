@@ -30,7 +30,12 @@ export async function getServerSideProps(context){
   const genre = context.query.genre
 
   // make a get request to the TMDB server
-  const request = await fetch(`https://api.themoviedb.org/3${requests[genre]?.url || requests.fetchTrending}`)
+  const request = await fetch(`https://api.themoviedb.org/3${requests[genre]?.url || requests.fetchTrending}`,{
+    headers: {
+      'Content-Type': 'application/json', 
+      'User-Agent': 'Mozilla/5.0'
+    }
+  })
   .then(response => response.json())
 
   // after getting the request, make return this data as a prop to the Component
